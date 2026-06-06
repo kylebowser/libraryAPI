@@ -1,6 +1,6 @@
 const routes = require("express").Router();
 const bookControl = require("../controllers/bookControl");
-const userControl = require("../controllers/userControl");
+const patronControl = require("../controllers/patronControl.js");
 const validation = require("../middleware/validate");
 const auth = require("../middleware/authenticate.js");
 const passport = require("passport");
@@ -31,14 +31,24 @@ routes.put("/books/:id", auth, validation.saveBook, bookControl.updateBook);
 
 routes.delete("/books/:id", auth, bookControl.deleteBook);
 
-routes.get("/users", userControl.getAll);
+routes.get("/patrons", patronControl.getAll);
 
-routes.get("/users/:id", userControl.getSingle);
+routes.get("/patrons/:id", patronControl.getSingle);
 
-routes.post("/users", auth, validation.saveUser, userControl.createUser);
+routes.post(
+  "/patrons",
+  auth,
+  validation.savePatron,
+  patronControl.createPatron,
+);
 
-routes.put("/users/:id", auth, validation.saveUser, userControl.updateUser);
+routes.put(
+  "/patrons/:id",
+  auth,
+  validation.savePatron,
+  patronControl.updatePatron,
+);
 
-routes.delete("/users/:id", auth, userControl.deleteUser);
+routes.delete("/patrons/:id", auth, patronControl.deletePatron);
 
 module.exports = routes;

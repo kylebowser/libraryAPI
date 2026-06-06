@@ -24,7 +24,7 @@ const saveBook = (req, res, next) => {
   });
 };
 
-const saveUser = (req, res, next) => {
+const savePatron = (req, res, next) => {
   const validationRule = {
     name: "required|string",
     checkedOut: "required|integer",
@@ -43,4 +43,4 @@ const saveUser = (req, res, next) => {
   });
 };
 
-module.exports = { saveBook, saveUser };
+module.exports = { saveBook, savePatron };
