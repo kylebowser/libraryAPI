@@ -77,13 +77,16 @@
                 "pageCount": {
                   "example": "any"
                 },
-                "price": {
+                "fine": {
                   "example": "any"
                 },
                 "publisher": {
                   "example": "any"
                 },
                 "publicationDate": {
+                  "example": "any"
+                },
+                "checkedOut": {
                   "example": "any"
                 }
               }
@@ -159,13 +162,16 @@
                 "pageCount": {
                   "example": "any"
                 },
-                "price": {
+                "fine": {
                   "example": "any"
                 },
                 "publisher": {
                   "example": "any"
                 },
                 "publicationDate": {
+                  "example": "any"
+                },
+                "checkedOut": {
                   "example": "any"
                 }
               }
@@ -216,30 +222,65 @@
         }
       }
     },
-    "/users": {
+    "/patrons": {
       "get": {
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "checkedOut": {
+                  "example": "any"
+                },
+                "finesDue": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "401": {
             "description": "Unauthorized"
           },
           "412": {
             "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
-    "/users/{id}": {
+    "/patrons/{id}": {
       "get": {
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -249,8 +290,17 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -262,14 +312,41 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "checkedOut": {
+                  "example": "any"
+                },
+                "finesDue": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
           "401": {
             "description": "Unauthorized"
           },
           "412": {
             "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -284,8 +361,17 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
           "401": {
             "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
