@@ -18,7 +18,7 @@
         "fine": 19.00,
         "publisher": "Example Publisher1",
         "publicationDate": "2021-02-02",
-        "checkedOut": "true"
+        "checkedOut": true
     },
 
     "name": {

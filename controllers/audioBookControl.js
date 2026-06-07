@@ -5,7 +5,7 @@ const ObjectId = require("mongodb").ObjectId;
 const getAll = async (req, res) => {
   try {
     const db = mongodb.getDb();
-    const lists = await db.collection("books").find().toArray();
+    const lists = await db.collection("audio_books").find().toArray();
     res.setHeader("Content-Type", "application/json");
     return res.status(200).json(lists);
   } catch (err) {
@@ -22,7 +22,10 @@ const getSingle = async (req, res) => {
     }
     const id = new ObjectId(req.params.id);
     const db = mongodb.getDb();
-    const lists = await db.collection("books").find({ _id: id }).toArray();
+    const lists = await db
+      .collection("audio_books")
+      .find({ _id: id })
+      .toArray();
     res.setHeader("Content-Type", "application/json");
     return res.status(200).json(lists[0]);
   } catch (err) {
@@ -30,27 +33,22 @@ const getSingle = async (req, res) => {
   }
 };
 
-//     if (err) {
-//       return res.status(400).json({ message: err });
-//     }
-
-//     res.setHeader('Content-Type', 'application/json');
-//     return res.status(200).json(lists[0]); // we just need the first one (the only one)
-//   });
-// };
-
 const createBook = async (req, res) => {
   const book = {
     name: req.body.name,
     authorName: req.body.authorName,
+    narrator: req.body.narrator,
     genre: req.body.genre,
-    pageCount: req.body.pageCount,
+    minutes: req.body.minutes,
     fine: req.body.fine,
     publisher: req.body.publisher,
     publicationDate: req.body.publicationDate,
     checkedOut: req.body.checkedOut,
   };
-  const result = await mongodb.getDb().collection("books").insertOne(book);
+  const result = await mongodb
+    .getDb()
+    .collection("audio_books")
+    .insertOne(book);
   if (result.acknowledged) {
     res.status(204).send();
   } else {
@@ -68,8 +66,9 @@ const updateBook = async (req, res) => {
   const book = {
     name: req.body.name,
     authorName: req.body.authorName,
+    narrator: req.body.narrator,
     genre: req.body.genre,
-    pageCount: req.body.pageCount,
+    minutes: req.body.minutes,
     fine: req.body.fine,
     publisher: req.body.publisher,
     publicationDate: req.body.publicationDate,
@@ -77,7 +76,7 @@ const updateBook = async (req, res) => {
   };
   const result = await mongodb
     .getDb()
-    .collection("books")
+    .collection("audio_books")
     .updateOne({ _id: id }, { $set: book });
   if (result.modifiedCount > 0) {
     res.status(204).send();
@@ -95,7 +94,7 @@ const deleteBook = async (req, res) => {
   const id = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
-    .collection("books")
+    .collection("audio_books")
     .deleteOne({ _id: id });
   if (result.deletedCount > 0) {
     res.status(204).send();

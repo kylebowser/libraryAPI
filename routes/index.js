@@ -1,6 +1,8 @@
 const routes = require("express").Router();
 const bookControl = require("../controllers/bookControl");
 const patronControl = require("../controllers/patronControl.js");
+const librarianControl = require("../controllers/librarianControl.js");
+const audioBookControl = require("../controllers/audioBookControl.js");
 const validation = require("../middleware/validate");
 const auth = require("../middleware/authenticate.js");
 const passport = require("passport");
@@ -50,5 +52,47 @@ routes.put(
 );
 
 routes.delete("/patrons/:id", auth, patronControl.deletePatron);
+
+routes.get("/audio-books", audioBookControl.getAll);
+
+routes.get("/audio-books/:id", audioBookControl.getSingle);
+
+routes.post(
+  "/audio-books",
+  auth,
+  validation.saveAudioBook,
+  audioBookControl.createBook,
+);
+
+routes.put(
+  "/audio-books/:id",
+  auth,
+  validation.saveAudioBook,
+  audioBookControl.updateBook,
+);
+
+routes.delete("/audio-books/:id", auth, audioBookControl.deleteBook);
+
+// Librarian routes
+
+routes.get("/librarians", librarianControl.getAll);
+
+routes.get("/librarians/:id", librarianControl.getSingle);
+
+routes.post(
+  "/librarians",
+  auth,
+  validation.saveLibrarian,
+  librarianControl.createLibrarian,
+);
+
+routes.put(
+  "/librarians/:id",
+  auth,
+  validation.saveLibrarian,
+  librarianControl.updateLibrarian,
+);
+
+routes.delete("/librarians/:id", auth, librarianControl.deleteLibrarian);
 
 module.exports = routes;
