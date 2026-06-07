@@ -4,9 +4,10 @@
         "authorName": "Smith",
         "genre": "Horror",
         "pageCount": 300,
-        "price": 19.99,
+        "fine": 19.99,
         "publisher": "Example Publisher",
-        "publicationDate": "2020-01-01"
+        "publicationDate": "2020-01-01",
+        "checkedOut": "false"
     },
 
     "book2": {
@@ -14,9 +15,10 @@
         "authorName": "Smithy",
         "genre": "Adventure",
         "pageCount": 320,
-        "price": 19.00,
+        "fine": 19.00,
         "publisher": "Example Publisher1",
-        "publicationDate": "2021-02-02"
+        "publicationDate": "2021-02-02",
+        "checkedOut": "true"
     },
 
     "name": {
