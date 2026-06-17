@@ -75,8 +75,6 @@ routes.delete("/audio-books/:id", auth, audioBookControl.deleteBook);
 
 // Librarian routes
 
-routes.get("/librarians", librarianControl.getAll);
-
 routes.get("/librarians/:id", librarianControl.getSingle);
 
 routes.post(
